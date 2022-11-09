@@ -13,6 +13,12 @@ type Group struct {
 	m     map[string]*call
 }
 
+func NewGroup() *Group {
+	return &Group{
+		m: make(map[string]*call),
+	}
+}
+
 func (g *Group) Do(key string, fn func() (interface{}, error)) (interface{}, error) {
 	g.mutex.Lock()
 	if c, ok := g.m[key]; ok {

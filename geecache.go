@@ -44,7 +44,7 @@ func NewGroup(name string, cacheBytes int64, getter Getter) *Group {
 		name:      name,
 		mainCache: cache{cacheBytes: cacheBytes},
 		getter:    getter,
-		loader:    &singleflight.Group{},
+		loader:    singleflight.NewGroup(),
 	}
 	mutex.Lock()
 	defer mutex.Unlock()
